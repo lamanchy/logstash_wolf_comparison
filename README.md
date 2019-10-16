@@ -92,6 +92,10 @@ Quick overview of Logstash follows, furthermore this work is divided into three 
 
 ### non functional requirements
 
+### comparison on real environment
+
+- only little stack
+
 ## conclusion
 
 - wolf holds requirements well
