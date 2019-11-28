@@ -59,9 +59,10 @@ def run(command, env="", watcher=None):
 
     try:
         _, stderr = p.communicate()
+        end = time()
     except KeyboardInterrupt:
+        end = time()
         stderr = p.stderr.read()
-    end = time()
 
     if t is not None:
         t.join()

@@ -16,7 +16,6 @@ def base_command(config):
 
 def stop_when(cpu_percent_less_that=None, seconds_passed=None):
     def watcher(p):
-        ps = psutil.Process(p.pid)
         i = 0
         while True:
             if i == seconds_passed:
