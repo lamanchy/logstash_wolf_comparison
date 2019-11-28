@@ -1,0 +1,6 @@
+#path.data: /home/lomic/caribou_target/parser/data
+#path.logs: /home/lomic/caribou_target/parser/logs
+path.config: tests/logstash_configs/parser_config/pipeline.conf
+pipeline.output.workers: 1
+pipeline.batch.size: 125
+pipeline.batch.delay: 10
