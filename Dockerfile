@@ -13,7 +13,7 @@ RUN apt install time -yqq
 RUN apt install pv -yqq
 RUN python3.6 -m pip install numpy
 RUN python3.6 -m pip install matplotlib
-RUN apt install netcat -yqq
+RUN apt install netcat-openbsd -yqq
 
 COPY . .
 

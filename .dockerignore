@@ -5,3 +5,7 @@ caches
 test_logs
 benchmarks
 caches
+wolf/install
+wolf/wolf_source
+.git
+.idea
