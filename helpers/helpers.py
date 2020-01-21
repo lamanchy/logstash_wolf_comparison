@@ -1,18 +1,16 @@
-import json
 import os
 import tarfile
-import threading
+import zipfile
 from os.path import join
 from pathlib import Path
 from platform import uname
 from subprocess import PIPE
 from threading import Thread
 from time import sleep, time
-
-import zipfile
 from urllib.request import build_opener
 
 import psutil
+
 from helpers.paths import base_dir
 
 

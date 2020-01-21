@@ -1,6 +1,5 @@
 import os
 
-import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
@@ -22,6 +21,7 @@ tool_order = [
     "Wolf with json conversion",
     "Libraries"
 ]
+
 
 def render_result(name, *measurements):
     res = {}
@@ -132,10 +132,12 @@ def render_result(name, *measurements):
 
         ax.yaxis.set_tick_params(labelcolor="grey", color="lightgrey")
         ax.ticklabel_format(style='plain')
+
         def plain(x, pos):
             if x >= 1:
                 return str(int(x))
             return str(x)
+
         # if mn_value * 100 < mx_value:
         #     ax.set_yscale('log')
         #     ax.yaxis.set_major_formatter(FuncFormatter(plain))

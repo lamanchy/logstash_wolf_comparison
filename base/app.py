@@ -4,7 +4,7 @@ from math import ceil
 from os.path import dirname, abspath, join
 from subprocess import PIPE
 from threading import Thread
-from time import sleep, time
+from time import sleep
 
 import psutil
 from psutil import Popen
@@ -18,6 +18,9 @@ def app_cache(fn):
     def decorator(self, *args, **kwargs):
         executable = getattr(self, "executable", "")
         name = f"{self.name()}_{executable}_{fn.__name__}"
+        if len(executable) > 0:
+            executable += " "
+        print(f"Runnning {self.name()} {executable}{fn.__name__}")
         return helper_cache(name)(fn)(self, *args, **kwargs)
 
     return decorator

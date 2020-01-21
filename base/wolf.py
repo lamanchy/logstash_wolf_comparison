@@ -6,7 +6,6 @@ import git
 
 from base.app import App
 from helpers.helpers import run, get_folder_size
-from helpers.paths import base_dir
 
 
 class Wolf(App):
