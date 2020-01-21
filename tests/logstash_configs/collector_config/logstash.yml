@@ -1,8 +1,0 @@
-#path.data: C:\SafeQ6\calf\calf\logstash-6.3.0\data
-#path.logs: C:\SafeQ6\calf\calf\logstash-6.3.0\out
-path.config: tests/logstash_configs/collector_config/pipepline.conf
-queue.type: persisted
-queue.page_capacity: 50mb
-queue.checkpoint.writes: 0
-queue.checkpoint.acks: 0
-queue.checkpoint.interval: 1000

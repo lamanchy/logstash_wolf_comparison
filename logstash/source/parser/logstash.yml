@@ -1,0 +1,4 @@
+path.config: logstash/source/parser/pipeline.conf
+pipeline.output.workers: 1
+pipeline.batch.size: 125
+pipeline.batch.delay: 10

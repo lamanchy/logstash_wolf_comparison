@@ -1,0 +1,7 @@
+path.config: logstash/source/empty_with_buffer_enabled/pipeline.conf
+path.queue: logstash/source/empty_with_buffer_enabled/queue
+queue.type: persisted
+queue.page_capacity: 50mb
+queue.checkpoint.writes: 0
+queue.checkpoint.acks: 0
+queue.checkpoint.interval: 1000

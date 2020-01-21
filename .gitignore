@@ -1,5 +1,13 @@
 /.idea
 /venv
 
-/tests/libs/logstash
-/tests/libs/wolf
+logstash/build
+logstash/source/collector/queue
+logstash/source/empty_with_buffer_enabled/queue
+wolf/source
+wolf/wolf_source
+wolf/build
+wolf/install
+test_logs
+benchmarks
+caches

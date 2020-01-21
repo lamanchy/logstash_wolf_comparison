@@ -1,2 +1,5 @@
 gitpython
 psutil
+docker
+numpy
+matplotlib

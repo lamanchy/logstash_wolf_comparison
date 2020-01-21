@@ -1,0 +1,7 @@
+path.config: logstash/source/collector/pipepline.conf
+path.queue: logstash/source/collector/queue
+queue.type: persisted
+queue.page_capacity: 50mb
+queue.checkpoint.writes: 0
+queue.checkpoint.acks: 0
+queue.checkpoint.interval: 1000
