@@ -227,19 +227,19 @@ class App:
     @app_result
     @app_cache
     def thousand_per_second(self):
-        return self.run_and_listen((1, 60, 1000))
+        return self.run_and_listen((1, 180, 1000))
 
     @app_result
     @app_cache
     def full_load(self):
-        return self.run_and_listen((8, 60, 0))
+        return self.run_and_listen((8, 180, 0))
 
     @app_result
     @app_cache
     def buffer_then_read(self):
-        return self.run_then_listen((8, 60, 0))
+        return self.run_then_listen((8, 180, 0))
 
     @app_result
     @app_cache
     def trickle_then_read(self):
-        return self.run_then_listen((1, 60, 1000))
+        return self.run_then_listen((1, 180, 1000))
