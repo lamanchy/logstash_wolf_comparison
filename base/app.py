@@ -66,6 +66,8 @@ class App:
         "ending": None
     }
 
+    base_time = 60
+
     def __init__(self, executable):
         self.executable = executable
 
@@ -138,7 +140,7 @@ class App:
                            start_when="started",
                            end_when="ending")
         # for more precision, run with longer time and subtract results
-        res2 = self.run_app(watcher=stop_when(seconds_passed=605),
+        res2 = self.run_app(watcher=stop_when(seconds_passed=self.base_time * 10 + 5),
                             start_when="started",
                             end_when="ending")
         res = subtract_measurements(res2, res)
@@ -227,19 +229,19 @@ class App:
     @app_result
     @app_cache
     def thousand_per_second(self):
-        return self.run_and_listen((1, 180, 1000))
+        return self.run_and_listen((1, 3 * self.base_time, 1000))
 
     @app_result
     @app_cache
     def full_load(self):
-        return self.run_and_listen((8, 180, 0))
+        return self.run_and_listen((8, 3 * self.base_time, 0))
 
     @app_result
     @app_cache
     def buffer_then_read(self):
-        return self.run_then_listen((8, 180, 0))
+        return self.run_then_listen((8, 3 * self.base_time, 0))
 
     @app_result
     @app_cache
     def trickle_then_read(self):
-        return self.run_then_listen((1, 180, 1000))
+        return self.run_then_listen((1, 3 * self.base_time, 1000))
