@@ -179,7 +179,7 @@ class App:
                 sleep(2)
 
         res = self.run_app(watcher=stop_when(cpu_percent_less_that=10, before=before),
-                           start_when="started")
+                           start_when="started", end_when="ending")
 
         # if receiver[0].returncode is None:
         #     # send ctrl-c to nc
