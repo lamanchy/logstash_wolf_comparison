@@ -14,6 +14,8 @@ RUN apt install pv -yqq
 RUN python3.6 -m pip install numpy
 RUN python3.6 -m pip install matplotlib
 RUN apt install netcat-openbsd -yqq
+RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+RUN apt install git-lfs -yqq
 
 COPY . .
 

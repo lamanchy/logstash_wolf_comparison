@@ -98,6 +98,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
                 start_system = cpu_times.system
                 break
         else:
+            print(stdout_lines, stderr)
             raise RuntimeError("elapsed_starts_when not found")
     if elapsed_ends_when is not None:
         for elapsed, cpu_times, line in stdout_lines:
@@ -107,6 +108,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
                 end_system = cpu_times.system
                 break
         else:
+            print(stdout_lines, stderr)
             raise RuntimeError("elapsed_ends_when not found")
 
     if t is not None:
@@ -131,6 +133,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
 
     except AssertionError as e:
         print(e)
+        print(stdout_lines)
         print(stderr)
         raise
 
