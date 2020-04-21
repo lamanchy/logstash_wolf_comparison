@@ -59,7 +59,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
 
     start, start_system, start_user, end_system, end_user = time(), 0, 0, 0, 0
     p = psutil.Popen(env + " /usr/bin/time -v " + command, shell=True, encoding="ascii", stderr=PIPE, stdout=PIPE,
-                     cwd=cwd)
+                     cwd=cwd, close_fds=True, buffsize=0)
     t = None
     if watcher is not None and elapsed_starts_when is None:
         print("starting watcher1", flush=True)
