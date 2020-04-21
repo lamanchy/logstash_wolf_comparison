@@ -42,7 +42,7 @@ class Logstash(App):
         # 'docker inspect docker.elastic.co/logstash/logstash:6.3.0 --format="{{.Size}}"'
         # 660022051
         return {
-            "Size without dependencies": [get_folder_size(cls.bin_dir()) / 1024 / 1024, "MB"],
+            "Tool's size": [get_folder_size(cls.bin_dir()) / 1024 / 1024, "MB"],
             "Linux docker image size": [660022051 / 1024 / 1024, "MB"]
         }
 

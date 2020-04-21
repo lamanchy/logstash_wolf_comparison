@@ -32,6 +32,11 @@ units_order = [
     "GB",
 ]
 
+mes_order = [
+    "Tool's size",
+    "Linux docker image size",
+]
+
 left_title = {
     "Wolf compilation": 1.9,
     "Disk usage": 2.5,
@@ -121,7 +126,13 @@ def render_result(name, *measurements):
         brs = []
         i = 0
         xticks = []
-        for measurement in sorted(measurements):
+        def get_mes_pos(x):
+            try:
+                return mes_order.index(x)
+            except ValueError:
+                print(x)
+                return x
+        for measurement in sorted(measurements, key=get_mes_pos):
             group = measurements[measurement]
             xticks.append(i * width + width * len(group) / 2 - width / 2 + spacing)
             for tool in sorted(tools, key=lambda x: tool_order.index(x)):
@@ -168,7 +179,7 @@ def render_result(name, *measurements):
         #     ax.set_yscale('log')
         #     ax.yaxis.set_major_formatter(FuncFormatter(plain))
         ax.set_xticks(xticks)
-        ax.set_xticklabels([s.replace(" ", "\n") for s in sorted(measurements)])
+        ax.set_xticklabels([s.replace(" ", "\n") for s in sorted(measurements, key=get_mes_pos)])
 
         ax.yaxis.grid(which="major", color='lightgrey', zorder=0)
         ax.set_yticks(ax.get_yticks()[1:-1])

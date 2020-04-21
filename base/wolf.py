@@ -77,7 +77,7 @@ class Wolf(App):
         # 'docker inspect lamanchy/wolf_win --format="{{.Size}}"'
         # 11087519335
         return {
-            "Size without dependencies": [get_folder_size(cls.build_dir()) / 1024 / 1024, "MB"],
+            "Tool's size": [get_folder_size(cls.build_dir()) / 1024 / 1024, "MB"],
             "Linux docker image size": [703487571 / 1024 / 1024, "MB"],
             "Windows docker image size": [11087519335 / 1024 / 1024 / 1024, "GB"],
         }
