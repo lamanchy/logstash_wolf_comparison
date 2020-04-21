@@ -72,7 +72,6 @@ def render_result(name, *measurements):
 
     subplots = len(units)
     unit_keys = sorted(units.keys(), key=lambda x: units_order.index(x))
-    print(unit_keys)
     width_ratios = [sum([len(units[u][m]) for m in units[u]]) + (len(units[u]) - 1) for u in unit_keys]
     _, subplots = plt.subplots(1, subplots, gridspec_kw={'width_ratios': width_ratios},
                                figsize=(sum(width_ratios) / 2 + 2, 5))
@@ -130,7 +129,6 @@ def render_result(name, *measurements):
             try:
                 return mes_order.index(x)
             except ValueError:
-                print(x)
                 return x
         for measurement in sorted(measurements, key=get_mes_pos):
             group = measurements[measurement]
@@ -204,7 +202,6 @@ def render_result(name, *measurements):
 
     right_spacing = sum(width_ratios) / (sum(width_ratios) + 3) - 0.08
     wspace = (len(units) + 1) / len(units)
-    print(wspace)
     plt.subplots_adjust(right=right_spacing, left=min(0.15 - sum(width_ratios)/400, right_spacing-0.01), bottom=0.2, wspace=wspace - 0.5)
     # plt.tight_layout(w_pad=1)
 

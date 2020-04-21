@@ -148,7 +148,6 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
         start = time()
         while True:
             cpu = psutil.cpu_percent(interval=.5)
-            print(cpu, seconds_passed, time() - start, flush=True)
             if seconds_passed is None or time() - start >= seconds_passed:
                 if cpu_percent_less_that is None or cpu < cpu_percent_less_that:
                     break
@@ -157,7 +156,6 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
             os.kill(p.children()[0].children()[0].pid, 2)
             for i in range(300):
                 if p.returncode is not None:
-                    print(p.returncode)
                     break
                 sleep(0.1)
             else:
@@ -167,7 +165,6 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                 os.kill(p.children()[0].pid, 2)
                 for i in range(300):
                     if p.returncode is not None:
-                        print(p.returncode)
                         break
                     sleep(0.1)
                 else:
@@ -177,7 +174,6 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                     os.kill(p.pid, 2)
                     for i in range(300):
                         if p.returncode is not None:
-                            print(p.returncode)
                             break
                         sleep(0.1)
                     else:
