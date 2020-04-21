@@ -77,6 +77,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
     # try:
     while True:
         line = p.stdout.readline()
+        print(line)
         if not line:
             break
         try:
@@ -84,6 +85,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
         except (IndexError, psutil.NoSuchProcess):
             pass
         if watcher is not None and t is None and elapsed_starts_when is not None and elapsed_starts_when in line:
+            print("starting watcher")
             t = Thread(target=watcher, args=(p,))
             t.start()
 
