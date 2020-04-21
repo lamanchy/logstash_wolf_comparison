@@ -175,7 +175,9 @@ class App:
                             cmd,
                             shell=True)
                         qs.append(q)
+                print("waiting for input to end")
                 [q.wait() for q in qs]
+                print("input ended")
             if listen_after:
                 make_receiver()
                 # sleep for a while so it can connect
