@@ -75,6 +75,10 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
             pass
 
     stdout_lines = []
+    def get_rc(p):
+        while True:
+            print(p.returncode, flush=True)
+    Thread(target=get_rc, args=(p, )).start()
     # try:
     while True:
         line = p.stdout.readline()
