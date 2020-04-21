@@ -13,21 +13,21 @@ Logstash.get()
 render_result("Wolf compilation",
               Wolf.get())
 
-# size info
-render_result("Disk usage",
-              Wolf.size(),
-              Logstash.size())
+# # size info
+# render_result("Disk usage",
+#               Wolf.size(),
+#               Logstash.size())
 
 # compilation
 render_result(f"Empty compilation",
               Wolf("empty").compile(),
               Logstash("empty").compile())
-
-# empty
-render_result("Empty configuration no input",
-              Wolf("empty").no_input(),
-              Logstash("empty").no_input(),
-              Netcat("empty").no_input())
+#
+# # empty
+# render_result("Empty configuration no input",
+#               Wolf("empty").no_input(),
+#               Logstash("empty").no_input(),
+#               Netcat("empty").no_input())
 
 render_result("Empty configuration trickle",
               Wolf("empty").thousand_per_second(),
@@ -46,28 +46,28 @@ render_result("Empty configuration buffer then read",
               Wolf("empty_with_json_conversion", enable_buffer=True).buffer_then_read(),
               Logstash("empty_with_buffer_enabled").buffer_then_read())
 
-# collector
-render_result(f"Collector compilation",
-              Wolf("collector").compile(),
-              Logstash("collector").compile())
-
-render_result("Collector no input",
-              Wolf("collector").no_input(),
-              Logstash("collector").no_input())
-
-render_result("Collector trickle",
-              Wolf("collector").thousand_per_second(),
-              Logstash("collector").thousand_per_second())
-
-render_result("Collector full load",
-              Wolf("collector").full_load(),
-              Logstash("collector").full_load())
-
-# parser
-render_result("Parser trickle",
-              Wolf("parser").thousand_per_second(),
-              Logstash("parser").thousand_per_second())
-
-render_result("Parser full load",
-              Wolf("parser").full_load(),
-              Logstash("parser").full_load())
+# # collector
+# render_result(f"Collector compilation",
+#               Wolf("collector").compile(),
+#               Logstash("collector").compile())
+#
+# render_result("Collector no input",
+#               Wolf("collector").no_input(),
+#               Logstash("collector").no_input())
+#
+# render_result("Collector trickle",
+#               Wolf("collector").thousand_per_second(),
+#               Logstash("collector").thousand_per_second())
+#
+# render_result("Collector full load",
+#               Wolf("collector").full_load(),
+#               Logstash("collector").full_load())
+#
+# # parser
+# render_result("Parser trickle",
+#               Wolf("parser").thousand_per_second(),
+#               Logstash("parser").thousand_per_second())
+#
+# render_result("Parser full load",
+#               Wolf("parser").full_load(),
+#               Logstash("parser").full_load())
