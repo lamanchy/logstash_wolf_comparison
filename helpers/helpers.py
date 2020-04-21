@@ -78,6 +78,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
     def get_rc(p):
         while True:
             print(p.returncode, flush=True)
+            sleep(1)
     Thread(target=get_rc, args=(p, )).start()
     # try:
     while True:
