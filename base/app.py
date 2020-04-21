@@ -67,7 +67,7 @@ class App:
         "ending": None
     }
 
-    base_time = 60
+    base_time = 5
 
     def __init__(self, executable):
         self.executable = executable
