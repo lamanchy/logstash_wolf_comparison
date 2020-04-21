@@ -166,6 +166,7 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
             os.kill(p.children()[0].children()[0].pid, 2)
             for i in range(300):
                 if p.returncode is not None:
+                    print(p.returncode)
                     break
                 sleep(0.1)
             else:
