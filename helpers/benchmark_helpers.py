@@ -11,16 +11,42 @@ tool_colors = {
     "Wolf": "xkcd:salmon",
     "Netcat": "xkcd:green",
     "Libraries": "xkcd:red",
-    "Wolf with json conversion": "xkcd:peach"
+    "Wolf with json\nconversion": "xkcd:peach"
 }
 
 tool_order = [
     "Logstash",
     "Netcat",
     "Wolf",
-    "Wolf with json conversion",
+    "Wolf with json\nconversion",
     "Libraries"
 ]
+
+units_order = [
+    "s",
+    "%",
+    "msg/s",
+    "µs/msg",
+    "MB",
+    "B/msg",
+    "GB",
+]
+
+left_title = {
+    "Wolf compilation": 1.9,
+    "Disk usage": 2.5,
+    "Empty compilation": 1.9,
+'Empty configuration no input': 1.8,
+'Empty configuration trickle': 1.5,
+'Empty configuration full load': 1.5,
+'Empty configuration buffer then read': 1.5,
+'Collector compilation': 1.9,
+'Collector no input': 1.85,
+'Collector trickle': 1.7,
+'Collector full load': 1.7,
+'Parser trickle': 1.65,
+'Parser full load': 1.6,
+}
 
 
 def render_result(name, *measurements):
@@ -40,7 +66,8 @@ def render_result(name, *measurements):
                 store[measurement][tool] = res[tool][measurement]
 
     subplots = len(units)
-    unit_keys = sorted(units.keys(), reverse=True)
+    unit_keys = sorted(units.keys(), key=lambda x: units_order.index(x))
+    print(unit_keys)
     width_ratios = [sum([len(units[u][m]) for m in units[u]]) + (len(units[u]) - 1) for u in unit_keys]
     _, subplots = plt.subplots(1, subplots, gridspec_kw={'width_ratios': width_ratios},
                                figsize=(sum(width_ratios) / 2 + 2, 5))
@@ -94,7 +121,6 @@ def render_result(name, *measurements):
         brs = []
         i = 0
         xticks = []
-        missing_tools = set()
         for measurement in sorted(measurements):
             group = measurements[measurement]
             xticks.append(i * width + width * len(group) / 2 - width / 2 + spacing)
@@ -157,21 +183,25 @@ def render_result(name, *measurements):
             ax.yaxis.set_major_formatter(formatter)
 
         if u + 1 == len(unit_keys):
-            plt.text(1.3, 0, name.replace(" ", "\n") + "\n\n", ha="left", va="bottom", transform=ax.transAxes,
+
+            plt.text(left_title[name], 0, name.replace(" ", "\n") + "\n\n", ha="left", va="bottom", transform=ax.transAxes,
                      ma="left",
                      size="x-large", fontstyle="italic", fontfamily="serif")
         # plt.setp(ax.get_yticklabels()[0], visible=False)
         # plt.setp(ax.get_yticks(), visible=False)
         # plt.setp(ax.get_yticklabels()[-1], visible=False)
 
-    plt.subplots_adjust(right=0.7, bottom=0.2, wspace=0.5)
+    right_spacing = sum(width_ratios) / (sum(width_ratios) + 3) - 0.08
+    wspace = (len(units) + 1) / len(units)
+    print(wspace)
+    plt.subplots_adjust(right=right_spacing, left=min(0.15 - sum(width_ratios)/400, right_spacing-0.01), bottom=0.2, wspace=wspace - 0.5)
     # plt.tight_layout(w_pad=1)
 
     if len(tools) > 1:
-        subplots[-1].legend(loc='upper left', edgecolor="none", facecolor="none", bbox_to_anchor=(1.2, 1))
+        subplots[-1].legend(loc='upper left', edgecolor="none", facecolor="none", bbox_to_anchor=(wspace*2-1, 1))
 
     if not os.path.exists(benchmarks_path):
         os.mkdir(benchmarks_path)
 
     # Update the plot
-    plt.savefig(os.path.join(benchmarks_path, f"{name}.png"))
+    plt.savefig(os.path.join(benchmarks_path, f"{name}.png"), dpi=300)

@@ -19,9 +19,9 @@ render_result("Disk usage",
               Logstash.size())
 
 # compilation
-render_result(f"Collector compilation",
-              Wolf("collector").compile(),
-              Logstash("collector").compile())
+render_result(f"Empty compilation",
+              Wolf("empty").compile(),
+              Logstash("empty").compile())
 
 # empty
 render_result("Empty configuration no input",
@@ -47,6 +47,14 @@ render_result("Empty configuration buffer then read",
               Logstash("empty_with_buffer_enabled").buffer_then_read())
 
 # collector
+render_result(f"Collector compilation",
+              Wolf("collector").compile(),
+              Logstash("collector").compile())
+
+render_result("Collector no input",
+              Wolf("collector").no_input(),
+              Logstash("collector").no_input())
+
 render_result("Collector trickle",
               Wolf("collector").thousand_per_second(),
               Logstash("collector").thousand_per_second())

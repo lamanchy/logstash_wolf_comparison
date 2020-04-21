@@ -10,6 +10,7 @@ Because implementation of custom solution was selected as best current alternati
 
 ## introduction
 
+Y Soft Corporation started using Logstash as a part of solution for processing logs in 
 - Y Soft and its log processing pipeline
 - general overview of what kinds of problems Logstash caused
 - "there is no better alternative", therefore custom solution
@@ -30,7 +31,7 @@ Quick overview of Logstash follows, furthermore this work is divided into three 
 
 ## choosing logstash alternative
 
-- where is logstash used
+- where is logstash used in YSoft monitoring
 - rough overview of unsatisfied requirements
 - follows: detailed requirements, existing tools vs custom solution
 

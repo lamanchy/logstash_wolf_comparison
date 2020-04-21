@@ -4,7 +4,8 @@ from math import ceil
 from os.path import dirname, abspath, join
 from subprocess import PIPE
 from threading import Thread
-from time import sleep
+from time import sleep, localtime, strftime
+import time
 
 import psutil
 from psutil import Popen
@@ -20,7 +21,7 @@ def app_cache(fn):
         name = f"{self.name()}_{executable}_{fn.__name__}"
         if len(executable) > 0:
             executable += " "
-        print(f"Runnning {self.name()} {executable}{fn.__name__}")
+        print(f"{strftime('%Y/%m/%d %H:%M:%S', localtime())} Runnning {self.name()} {executable}{fn.__name__}")
         return helper_cache(name)(fn)(self, *args, **kwargs)
 
     return decorator
@@ -40,7 +41,7 @@ def app_result(fn_or_name):
             key = key[0].upper() + key[1:]
             executable = getattr(self, "executable", "")
             if "with_json_conversion" in executable:
-                key += " with json conversion"
+                key += " with json\nconversion"
             return {key: res}
 
         return decorator
