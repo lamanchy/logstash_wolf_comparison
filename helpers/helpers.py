@@ -62,7 +62,6 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
                      cwd=cwd, close_fds=True, bufsize=0)
     t = None
     if watcher is not None and elapsed_starts_when is None:
-        print("starting watcher1", flush=True)
         t = Thread(target=watcher, args=(p,))
         t.start()
 
@@ -75,15 +74,9 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
             pass
 
     stdout_lines = []
-    def get_rc(p):
-        while True:
-            print(p.returncode, flush=True)
-            sleep(1)
-    Thread(target=get_rc, args=(p, )).start()
     # try:
     while True:
         line = p.stdout.readline()
-        print(line, flush=True)
         if not line:
             break
         try:
@@ -91,7 +84,6 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
         except (IndexError, psutil.NoSuchProcess):
             pass
         if watcher is not None and t is None and elapsed_starts_when is not None and elapsed_starts_when in line:
-            print("starting watcher", flush=True)
             t = Thread(target=watcher, args=(p,))
             t.start()
 
@@ -162,7 +154,6 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                     break
 
         try:
-            print("killing", flush=True)
             os.kill(p.children()[0].children()[0].pid, 2)
             for i in range(300):
                 if p.returncode is not None:
@@ -170,11 +161,9 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                     break
                 sleep(0.1)
             else:
-                print(time(), "killing process")
                 os.kill(p.children()[0].children()[0].pid, 9)
         except (IndexError, psutil.NoSuchProcess):
             try:
-                print("killing", flush=True)
                 os.kill(p.children()[0].pid, 2)
                 for i in range(300):
                     if p.returncode is not None:
@@ -182,11 +171,9 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                         break
                     sleep(0.1)
                 else:
-                    print(time(), "killing process")
                     os.kill(p.children()[0].children()[0].pid, 9)
             except (IndexError, psutil.NoSuchProcess):
                 try:
-                    print("killing", flush=True)
                     os.kill(p.pid, 2)
                     for i in range(300):
                         if p.returncode is not None:
@@ -194,11 +181,9 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                             break
                         sleep(0.1)
                     else:
-                        print(time(), "killing process")
                         os.kill(p.children()[0].children()[0].pid, 9)
                 except (IndexError, psutil.NoSuchProcess):
                     pass
-        print("killed", p.returncode, flush=True)
 
     return watcher
 

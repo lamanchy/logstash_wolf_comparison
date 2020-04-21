@@ -67,7 +67,7 @@ class App:
         "ending": None
     }
 
-    base_time = 5
+    base_time = 60
 
     def __init__(self, executable):
         self.executable = executable
@@ -175,9 +175,7 @@ class App:
                             cmd,
                             shell=True)
                         qs.append(q)
-                print("waiting for input to end")
                 [q.wait() for q in qs]
-                print("input ended")
             if listen_after:
                 make_receiver()
                 # sleep for a while so it can connect
