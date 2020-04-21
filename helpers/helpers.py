@@ -174,7 +174,7 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                 os.kill(p.children()[0].children()[0].pid, 9)
         except (IndexError, psutil.NoSuchProcess):
             pass
-        print("killed", flush=True)
+        print("killed", p.returncode, flush=True)
 
     return watcher
 
