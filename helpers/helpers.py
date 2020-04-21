@@ -62,6 +62,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
                      cwd=cwd)
     t = None
     if watcher is not None and elapsed_starts_when is None:
+        print("starting watcher1", flush=True)
         t = Thread(target=watcher, args=(p,))
         t.start()
 
