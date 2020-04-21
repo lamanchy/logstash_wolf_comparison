@@ -21,7 +21,7 @@ def app_cache(fn):
         name = f"{self.name()}_{executable}_{fn.__name__}"
         if len(executable) > 0:
             executable += " "
-        print(f"{strftime('%Y/%m/%d %H:%M:%S', localtime())} Runnning {self.name()} {executable}{fn.__name__}")
+        print(f"{strftime('%Y/%m/%d %H:%M:%S', localtime())} Runnning {self.name()} {executable}{fn.__name__}", flush=True)
         return helper_cache(name)(fn)(self, *args, **kwargs)
 
     return decorator
