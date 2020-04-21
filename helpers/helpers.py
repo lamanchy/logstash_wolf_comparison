@@ -77,7 +77,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
     # try:
     while True:
         line = p.stdout.readline()
-        print(line)
+        print(line, flush=True)
         if not line:
             break
         try:
@@ -85,7 +85,7 @@ def run(command, env="", watcher=None, elapsed_starts_when=None, elapsed_ends_wh
         except (IndexError, psutil.NoSuchProcess):
             pass
         if watcher is not None and t is None and elapsed_starts_when is not None and elapsed_starts_when in line:
-            print("starting watcher")
+            print("starting watcher", flush=True)
             t = Thread(target=watcher, args=(p,))
             t.start()
 
@@ -150,11 +150,13 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
         start = time()
         while True:
             cpu = psutil.cpu_percent(interval=.5)
+            print(cpu, seconds_passed, time() - start, flush=True)
             if seconds_passed is None or time() - start >= seconds_passed:
                 if cpu_percent_less_that is None or cpu < cpu_percent_less_that:
                     break
 
         try:
+            print("killing", flush=True)
             os.kill(p.children()[0].children()[0].pid, 2)
             for i in range(300):
                 if p.returncode is not None:
@@ -165,6 +167,7 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                 os.kill(p.children()[0].children()[0].pid, 9)
         except (IndexError, psutil.NoSuchProcess):
             pass
+        print("killed", flush=True)
 
     return watcher
 
