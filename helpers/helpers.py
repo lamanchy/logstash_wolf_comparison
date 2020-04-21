@@ -173,7 +173,31 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
                 print(time(), "killing process")
                 os.kill(p.children()[0].children()[0].pid, 9)
         except (IndexError, psutil.NoSuchProcess):
-            pass
+            try:
+                print("killing", flush=True)
+                os.kill(p.children()[0].pid, 2)
+                for i in range(300):
+                    if p.returncode is not None:
+                        print(p.returncode)
+                        break
+                    sleep(0.1)
+                else:
+                    print(time(), "killing process")
+                    os.kill(p.children()[0].children()[0].pid, 9)
+            except (IndexError, psutil.NoSuchProcess):
+                try:
+                    print("killing", flush=True)
+                    os.kill(p.pid, 2)
+                    for i in range(300):
+                        if p.returncode is not None:
+                            print(p.returncode)
+                            break
+                        sleep(0.1)
+                    else:
+                        print(time(), "killing process")
+                        os.kill(p.children()[0].children()[0].pid, 9)
+                except (IndexError, psutil.NoSuchProcess):
+                    pass
         print("killed", p.returncode, flush=True)
 
     return watcher
