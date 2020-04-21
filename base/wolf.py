@@ -85,7 +85,10 @@ class Wolf(App):
     @App.result
     @App.cache
     def compile(self):
-        shutil.rmtree(os.path.join(self.build_dir(), "CMakeFiles"))
+        try:
+            shutil.rmtree(os.path.join(self.build_dir(), "CMakeFiles"))
+        except FileNotFoundError:
+            pass
         self.build()
         res = run(f'cmake --build {self.build_dir()} --target {self.executable} -- -j 4')
         self.install()
