@@ -154,7 +154,7 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
 
         try:
             os.kill(p.children()[0].children()[0].pid, 2)
-            for i in range(300):
+            for i in range(600):
                 if p.returncode is not None:
                     break
                 sleep(0.1)
@@ -163,7 +163,7 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
         except (IndexError, psutil.NoSuchProcess):
             try:
                 os.kill(p.children()[0].pid, 2)
-                for i in range(300):
+                for i in range(600):
                     if p.returncode is not None:
                         break
                     sleep(0.1)
@@ -172,7 +172,7 @@ def stop_when(cpu_percent_less_that=None, seconds_passed=None, before=None):
             except (IndexError, psutil.NoSuchProcess):
                 try:
                     os.kill(p.pid, 2)
-                    for i in range(300):
+                    for i in range(600):
                         if p.returncode is not None:
                             break
                         sleep(0.1)
