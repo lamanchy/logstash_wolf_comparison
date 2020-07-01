@@ -31,19 +31,16 @@ render_result("Empty configuration no input",
 
 render_result("Empty configuration trickle",
               Wolf("empty").thousand_per_second(),
-              Wolf("empty_with_json_conversion").thousand_per_second(),
               Logstash("empty").thousand_per_second(),
               Netcat("empty").thousand_per_second())
 
 render_result("Empty configuration full load",
               Wolf("empty").full_load(),
-              Wolf("empty_with_json_conversion").full_load(),
               Netcat("empty").full_load(),
               Logstash("empty").full_load())
 
 render_result("Empty configuration buffer then read",
               Wolf("empty", enable_buffer=True).buffer_then_read(),
-              Wolf("empty_with_json_conversion", enable_buffer=True).buffer_then_read(),
               Logstash("empty_with_buffer_enabled").buffer_then_read())
 
 # collector
